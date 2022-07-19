@@ -1,10 +1,8 @@
 #!/bin/sh
 
-address=$1
-package=$2
+package=$1
 destination="/opt/ros/melodic"
 home=$PWD
-echo $home
 
 remove_files () {
 	eval "sudo find $destination -iname $package -type d" > list
@@ -13,7 +11,7 @@ remove_files () {
 		echo "[REMOVED] $adr"
 	done < list
 }
-
+address=$(sudo find /media -iname melodic -type d)
 eval "sudo find $address -iname $package -type d" > list
 while read loc; do
         temp_adr=$(echo $loc | sed 's/^.*opt/opt/')

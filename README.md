@@ -197,6 +197,7 @@ cd && sudo rm -rf eigen-3.3.7.tar.gz && sudo rm -rf eigen
   * Setup the environment
   ```
   sudo echo "source ~/autoware.ai/install/setup.bash --extend" >> ~/.bashrc
+  source ~/autoware.ai/install/setup.bash --extend
   ```
 
 
@@ -248,6 +249,7 @@ sh apt_install.sh
  * Setup the environment
   ```
   sudo echo "source ~/standard_ws/devel/setup.bash --extend" >> ~/.bashrc
+  source ~/standard_ws/devel/setup.bash --extend
   ```
   **Please Note, if standard_ws aleardy exists on you machine, avoid modifiying or rebuilding the environment. Instead, create a new environment to build the packages and add the corresponding PATH to _~/.bashrc_.**
   
@@ -260,10 +262,14 @@ sh apt_install.sh
  ```
  * Excluding _gpsins-localizer_, _ll2-global-planner_, and _stanley-controller_, the rest of packages can be deployed using _cp_ command
  ```
- sh cp_pkg.sh /media/<user_machine>/<image>/opt/ros/melodic/ <package_name>
+ sh cp_pkg.sh <package_name>
  ```
+ You need to repeat this step for all missing ros packages which you want to copy built pkg.
  
-   
+6. Finally, check Autoware.AI src files for the missing components and copy the source files into corresponding directory. Next, you need to rebuild the colcon environment
+```
+AUTOWARE_COMPILE_WITH_CUDA=1 colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+```
 
 
 
