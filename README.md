@@ -1,4 +1,4 @@
-# APSRC
+# Vehicle Build
 
 This repo is created for rebuilding the Instrumented Pacifica and RAM Spectra
 
@@ -22,7 +22,7 @@ Requirements:
 4. Open _Disks_ and select OS containing Disk (the disk that you want to create the image from) from left menue
 5. Select more options from top right corner and select _Create Disk Image..._ 
 
- <img src="https://github.com/mojtaba1989/apsrc/blob/main/docs/Screenshot1.png" alt="Disks" width="400"/>
+ <img src="https://github.com/APSRC/vehicle_build/blob/main/docs/Screenshot1.png" alt="Disks" width="400"/>
                 
 7. Select the external hard drive as the destination for creating disk image. This process will take about 20~40 mins
 8. Reboot the Spectra 
@@ -68,7 +68,7 @@ nvidia-smi
 ```
 _sample proper returned message_
 
-<img src="https://github.com/mojtaba1989/apsrc/blob/main/docs/nvidia-smi.png" alt="Disks" width="400"/>
+<img src="https://github.com/APSRC/vehicle_build/blob/main/docs/nvidia-smi.png" alt="Disks" width="400"/>
 
 ## Installing CUDA 10
 
@@ -214,12 +214,12 @@ However, not all the open-source packages are available for _bionic melodic_ com
 
 1. Clone _apsr tools_ from github
 ```
-cd && git clone https://github.com/mojtaba1989/apsrc.git
+cd && git clone https://github.com/APSRC/vehicle_build.git
 ```
 
 2. Check for missing packages
 ```
-cd apsrc/apsrc_tools
+cd vehicle_build/apsrc_tools
 sh check_pkg.sh requirements.list
 ```
 
@@ -229,26 +229,41 @@ sh apt_install.sh
 ```
 
 4. Building missing packages using _catkin_
-```
-cd && mkdir -p standard_ws/src
-cd standard_ws/src
-sudo cp <path/to/standard_ws/on/back/up>/src ~/standard_ws/src
-```
+ ```
+ cd && mkdir -p standard_ws/src
+ cd standard_ws/src
+ sudo cp /media/<user_machine>/<image>/home/<user_image>/<workspace>/src ~/standard_ws/src
+ ```
  * Before building the package we need to clone "cam_lidar_calibration" from [Github](https://github.com/acfr/cam_lidar_calibration)
-```
-git clone -c http.sslverify=false https://gitlab.acfr.usyd.edu.au/its/cam_lidar_calibration.git
-sudo apt update && sudo apt-get install -y ros-melodic-pcl-conversions ros-melodic-pcl-ros ros-melodic-tf2-sensor-msgs
-pip install pandas scipy
-```
+ ```
+ git clone -c http.sslverify=false https://gitlab.acfr.usyd.edu.au/its/cam_lidar_calibration.git
+ sudo apt update && sudo apt-get install -y ros-melodic-pcl-conversions ros-melodic-pcl-ros ros-   melodic-tf2-sensor-msgs
+ pip install pandas scipy
+ ```
  * Build packages from source codes
-```
-catkin_init_workspace
-cd .. && catkin_make
-```
+ ```
+ catkin_init_workspace
+ cd .. && catkin_make
+ ```
  * Setup the environment
   ```
   sudo echo "source ~/standard_ws/devel/setup.bash --extend" >> ~/.bashrc
   ```
+  **Please Note, if standard_ws aleardy exists on you machine, avoid modifiying or rebuilding the environment. Instead, create a new environment to build the packages and add the corresponding PATH to _~/.bashrc_.**
+  
+5. Next is to move required binary files from provided disk image into your machine
+ * update missing packages list
+ ```
+ cd ~/vehicle_build/apsr_tools
+ sh check_pkg.sh
+ cat install.log
+ ```
+ * Excluding _gpsins-localizer_, _ll2-global-planner_, and _stanley-controller_, the rest of packages can be deployed using _cp_ command
+ ```
+ sh cp_pkg.sh /media/<user_machine>/<image>/opt/ros/melodic/ <package_name>
+ ```
+ 
+   
 
 
 

@@ -27,4 +27,5 @@ while IFS= read -r line; do
 done < $check_list
 
 echo "${Y}Check install.log for missing packages${NC}"
+if [ ! -f "install.log1" ]; then echo "# No package to display" > install.log1; fi
 mv install.log1 install.log
