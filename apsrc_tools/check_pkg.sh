@@ -9,23 +9,49 @@ P='\033[0;35m'       # Purple
 C='\033[0;36m'         # Cyan
 W='\033[0;37m'        # White
 
-echo "Complementary package installation: MOJTABA BAHRAMGIRI APSRC Jun-27-2022"
+Help()
+{
+   # Display Help
+   echo "Complementary ROS Package version control: MOJTABA BAHRAMGIRI APSRC Jun-27-2022"
+   echo
+   echo "Syntax: scriptTemplate [-i|x|h]"
+   echo "options:"
+   echo "-i     Get input list of packages. Not declaired: to_install.log"
+   echo "-h     help."
+   echo "-x     installed.x file extention"
+   echo
+}
 
-default_list="./install.log"
-check_list=${1:-$default_list}
+checklist="./to_install.log"
+extension="dummy"
+
+while getopts "hi:x:" opt do
+    case $opt in
+        h) Help; exit 0;;
+        i) checklist=$OPTARG;;
+        x) extension=$OPTARG;;
+        \?) echo "${R}Error: Invalid option${NC}";exit 1;;
+    esac
+done        
+
+devel_list="installed.${extension}"
 if [ ! -f $check_list ]; then echo "No list has selected"; exit 1; fi
+if [ $extension -ne "dummy" ]; then echo "List of packages installed by ${extension}" > $devel_list
+
 
 while IFS= read -r line; do
   eval rosversion $line > /dev/null
   if [ $? -eq 0 ];
   then
     echo "$line:${G}$(rosversion $line)${NC}"
+    echo "$line::$(rosversion $line)" >> $devel_list
   else
     echo "$line: ${R}Not found${NC}"
-    echo "$line" >> install.log1
+    echo "$line" >> temp
   fi
 done < $check_list
 
 echo "${Y}Check install.log for missing packages${NC}"
-if [ ! -f "install.log1" ]; then echo "# No package to display" > install.log1; fi
-mv install.log1 install.log
+if [ ! -f "temp" ]; then echo "# No package to display" > temp; fi
+mv temp to_install.log
+unset Help
