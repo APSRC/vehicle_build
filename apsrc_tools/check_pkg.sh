@@ -25,7 +25,7 @@ Help()
 checklist="./to_install.log"
 extension="dummy"
 
-while getopts "hi:x:" opt do
+while getopts "hi:x:" opt; do
     case $opt in
         h) Help; exit 0;;
         i) checklist=$OPTARG;;
@@ -35,7 +35,7 @@ while getopts "hi:x:" opt do
 done        
 
 devel_list="installed.${extension}"
-if [ ! -f $check_list ]; then echo "No list has selected"; exit 1; fi
+if [ ! -f $checklist ]; then echo "No list has selected"; exit 1; fi
 if [ $extension -ne "dummy" ]; then echo "List of packages installed by ${extension}" > $devel_list
 
 
@@ -49,7 +49,7 @@ while IFS= read -r line; do
     echo "$line: ${R}Not found${NC}"
     echo "$line" >> temp
   fi
-done < $check_list
+done < $checklist
 
 echo "${Y}Check install.log for missing packages${NC}"
 if [ ! -f "temp" ]; then echo "# No package to display" > temp; fi

@@ -166,6 +166,10 @@ cd eigen && sudo mkdir build && cd build && sudo cmake .. && sudo make && sudo m
 cd && sudo rm -rf eigen-3.3.7.tar.gz && sudo rm -rf eigen
 ```
 
+Check eigen version
+```
+pkg-config --modversion eigen3
+```
 3. Build Autoware.ai
   * Create a workspace
   ```
