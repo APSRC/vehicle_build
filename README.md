@@ -54,7 +54,7 @@ sudo apt install -y vim git openssh-server curl
 4. Check compatible Nvidia drivers and install the driver
 ```
 ubuntu-drivers devices
-sudo install -y nvidia-driver-470
+sudo apt install -y nvidia-driver-470
 ```
 _replace 470 with the proper version (recommended 450, 460, and 470)_
 
