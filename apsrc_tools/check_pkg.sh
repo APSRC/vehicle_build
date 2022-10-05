@@ -36,7 +36,7 @@ done
 
 devel_list="installed.${extension}"
 if [ ! -f $checklist ]; then echo "No list has selected"; exit 1; fi
-if [ $extension -ne "dummy" ]; then echo "List of packages installed by ${extension}" > $devel_list
+if [ $extension -ne "dummy" ]; then echo "List of packages installed by ${extension}" > $devel_list; fi
 
 
 while IFS= read -r line; do
