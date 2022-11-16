@@ -212,6 +212,13 @@ pkg-config --modversion eigen3
   sudo echo "source ~/autoware.ai/install/setup.bash --extend" >> ~/.bashrc
   source ~/autoware.ai/install/setup.bash --extend
   ```
+  
+  * Create Symlink for Apolo
+  ```
+   cd ~/autoware.ai/install/lidar_apollo_cnn_seg_detect/share/lidar_apollo_cnn_seg_detect/
+   mkdir launch
+  ln -s ~/autoware.ai/src/core_perception/lidar_apollo_cnn_seg_detect/launch/lidar_apollo_cnn_seg_detect.launch ./launch
+  ```
 
 
 ## AStuff packages
