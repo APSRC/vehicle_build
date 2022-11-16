@@ -103,6 +103,13 @@ Reboot the Spectra and check the cuda installation
 sudo reboot
 nvcc -V
 ```
+Install cuDNN
+Download binary files (latest version for CUDA 10.0.130)
+```
+wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.4.38/Production/10.0_20190923/Ubuntu18_04-x64/libcudnn7_7.6.4.38-1%2Bcuda10.0_amd64.deb
+wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.4.38/Production/10.0_20190923/Ubuntu18_04-x64/libcudnn7-dev_7.6.4.38-1%2Bcuda10.0_amd64.deb
+```
+After downloading the _deb_ files, install the developer, and then runtime.
 
 ## Installing ROS Melodic
 
@@ -170,7 +177,7 @@ Check eigen version
 ```
 pkg-config --modversion eigen3
 ```
-3. Build Autoware.ai
+4. Build Autoware.ai
   * Create a workspace
   ```
   mkdir -p autoware.ai/src
