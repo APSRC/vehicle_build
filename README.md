@@ -104,12 +104,12 @@ sudo reboot
 nvcc -V
 ```
 Install cuDNN
-Download binary files (latest version for CUDA 10.0.130)
+Download binary files (latest version for CUDA 10.0.130). For downloading the files, you need to sign in.
 ```
 wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.4.38/Production/10.0_20190923/Ubuntu18_04-x64/libcudnn7_7.6.4.38-1%2Bcuda10.0_amd64.deb
 wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.4.38/Production/10.0_20190923/Ubuntu18_04-x64/libcudnn7-dev_7.6.4.38-1%2Bcuda10.0_amd64.deb
 ```
-After downloading the _deb_ files, install the developer, and then runtime.
+After downloading the _deb_ files, install the runtime libraries, and then development libraries.
 
 ## Installing ROS Melodic
 
