@@ -186,6 +186,8 @@ pkg-config --modversion eigen3
   ```
   vcs import src < autoware.ai.repos
   ```
+  Alternative method (recommended)
+  Copy _/src_ folder from backups into _~/autoware.ai/_.
 
   * Install dependencies using _rosdep_
   ```
